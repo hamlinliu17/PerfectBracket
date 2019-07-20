@@ -12,4 +12,4 @@ What gives teams an edge? Is it pure luck?
 [identifier]:https://www.kaggle.com/nateduncan/2011current-ncaa-basketball-games/downloads/2011current-ncaa-basketball-games.zip/
 
 - 7/20/2019
-  - found Kaggle Data from [this link] [identifier]
+  - found Kaggle Data from [this link][identifier]
