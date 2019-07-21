@@ -1,15 +1,20 @@
+'''
+
+Adding tournament columns to differentiate games that are tournaments and non tournaments
+
+Author: Hamlin Liu
+
+'''
+
 import pandas as pd 
 import numpy as np 
 
-
+#reading csv
 gamesdf = pd.read_csv('games.csv')
-
-
 dates = np.array(list(gamesdf.loc[:, "date"]))
 
+#compiling dates
 dates_ = []
-tourn_start = '03-14'
-tourn_end = '04-04'
 
 for date in dates:
     tournament_date = date.split('-')
@@ -27,6 +32,7 @@ for date in dates_:
 
 tournament = []
 
+#differentiating between tournament and non tournament
 for date in dates_1:
     month = date[1]
     day = date[2]
@@ -40,4 +46,10 @@ for date in dates_1:
 
 tournament = np.array(tournament)
 
-gamesdf
+#adding tournaments into a column
+
+gamesdf["Tournament"] = tournament
+
+print(gamesdf)
+
+gamesdf.to_csv('games1.csv')
