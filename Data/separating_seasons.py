@@ -13,7 +13,8 @@ from datetime import datetime
 
 
 def create_seasons(dates):
-    dates_li = [date.split('/') for date in dates] # reading the dates~
+    # creates a dictionary of seasons from all the dates in the date column
+    dates_li = [date.split('/') for date in dates] # reading the dates
     seasons = {}
     for date in dates_li:
         s = '/'
@@ -29,24 +30,27 @@ def create_seasons(dates):
     return seasons
 
 def newSeasonDF(targets, dates, df, year, start):
+    # utilizes a previous dataset, the dates in that data set, a set year, and a time that it starts
+    # outputs a new csv file for each season
     indices = []
     newdf = pd.DataFrame(columns = list(df.columns))
-    for date in targets:
-        indices.append(dates.index(date))
+    for i in range(len(targets)):
+        indices.append(dates.index(targets[i]))
+        dates.pop(dates.index(targets[i]))
+    return indices
+    # print('done finding the target dates', str(datetime.now()-start)[:9])
     
-    print('done finding the target dates', str(datetime.now()-start)[:9])
-    
-    newdf = newdf.append(df.loc[indices, :], ignore_index = True, sort=False)
+    # newdf = newdf.append(df.loc[indices, :], ignore_index = True, sort=False)
 
 
 
-    newdf = newdf.drop('Unnamed: 0', 1)
+    # newdf = newdf.drop('Unnamed: 0', 1)
 
-    newdf.to_csv('Seasons/' + str(year - 1) + '-' + str(year) + '_season.csv')
+    # newdf.to_csv('Seasons/' + str(year - 1) + '-' + str(year) + '_season.csv')
 
 
 
-    return newdf
+    # return newdf
 
 gamesdf = pd.read_csv('data_tournament.csv')
 

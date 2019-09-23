@@ -1,2 +1,8 @@
 
 .DS_Store
+.vscode/settings.json
+.idea/workspace.xml
+.idea/vcs.xml
+.idea/PerfectBracket.iml
+.idea/modules.xml
+.idea/misc.xml
