@@ -13,7 +13,7 @@ from datetime import datetime
 
 
 def create_seasons(dates):
-    dates_li = [date.split('/') for date in dates]
+    dates_li = [date.split('/') for date in dates] # reading the dates~
     seasons = {}
     for date in dates_li:
         s = '/'
@@ -67,6 +67,8 @@ print('done creating dictionary', str(datetime.now()-start)[:9])
 df = []
 for i in seasons:
     df = newSeasonDF(seasons[i], list(gamesdf['date']), gamesdf, i, start)
+
+
 
 
 
