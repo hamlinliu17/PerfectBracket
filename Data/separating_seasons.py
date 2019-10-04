@@ -35,22 +35,21 @@ def newSeasonDF(targets, dates, df, year, start):
     indices = []
     newdf = pd.DataFrame(columns = list(df.columns))
     for i in range(len(targets)):
-        indices.append(dates.index(targets[i]))
-        dates.pop(dates.index(targets[i]))
-    return indices
-    # print('done finding the target dates', str(datetime.now()-start)[:9])
+        new_item = dates.index(targets[i])
+        indices.append(new_item)
     
-    # newdf = newdf.append(df.loc[indices, :], ignore_index = True, sort=False)
+    print('done finding the target dates', str(datetime.now()-start)[:9])
+    newdf = newdf.append(df.loc[indices, :], ignore_index = True, sort=False)
 
 
 
-    # newdf = newdf.drop('Unnamed: 0', 1)
+    newdf = newdf.drop('Unnamed: 0', 1)
 
-    # newdf.to_csv('Seasons/' + str(year - 1) + '-' + str(year) + '_season.csv')
+    newdf.to_csv('Seasons/' + str(year - 1) + '-' + str(year) + '_season.csv')
 
 
 
-    # return newdf
+    return newdf
 
 gamesdf = pd.read_csv('data_tournament.csv')
 
@@ -68,8 +67,10 @@ seasons  =  create_seasons(dates)
 print('done creating dictionary', str(datetime.now()-start)[:9])
 
 
+
 df = []
 for i in seasons:
+    print(i)
     df = newSeasonDF(seasons[i], list(gamesdf['date']), gamesdf, i, start)
 
 
