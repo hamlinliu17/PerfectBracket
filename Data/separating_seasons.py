@@ -16,30 +16,27 @@ def create_seasons(dates):
     # creates a dictionary of seasons from all the dates in the date column
     dates_li = [date.split('/') for date in dates] # reading the dates
     seasons = {}
-    for date in dates_li:
+    for i in range(len(dates_li)): #adding the index of the dates
+        date = dates_li[i]
         s = '/'
         month = int(date[0])
         year = int(date[2])
         if month >= 11:
             year += 1
         if year not in seasons:
-            seasons[year] = [s.join(date)]
-
+            seasons[year] = [i]
             continue
-        seasons[year].append(s.join(date))
+        seasons[year].append(i)
     return seasons
 
-def newSeasonDF(targets, dates, df, year, start):
+def newSeasonDF(targets, df, year, start):
     # utilizes a previous dataset, the dates in that data set, a set year, and a time that it starts
     # outputs a new csv file for each season
-    indices = []
     newdf = pd.DataFrame(columns = list(df.columns))
-    for i in range(len(targets)):
-        new_item = dates.index(targets[i])
-        indices.append(new_item)
+    
     
     print('done finding the target dates', str(datetime.now()-start)[:9])
-    newdf = newdf.append(df.loc[indices, :], ignore_index = True, sort=False)
+    newdf = newdf.append(df.loc[targets, :], ignore_index = True, sort=False)
 
 
 
@@ -71,7 +68,7 @@ print('done creating dictionary', str(datetime.now()-start)[:9])
 df = []
 for i in seasons:
     print(i)
-    df = newSeasonDF(seasons[i], list(gamesdf['date']), gamesdf, i, start)
+    df = newSeasonDF(seasons[i], gamesdf, i, start)
 
 
 
